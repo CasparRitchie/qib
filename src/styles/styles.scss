@@ -1,0 +1,183 @@
+// Variables
+$font-family-primary: 'Hind', sans-serif;
+$font-family-secondary: 'Open Sans', sans-serif;
+$font-family-tertiary: 'Poppins', sans-serif;
+$primary-color: #0b4661;
+$secondary-color: #0094d2;
+$tertiary-color: #003c56;
+$light-color: #ffffff;
+$dark-color: #004455;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Typography
+body {
+  font-family: $font-family-primary;
+  font-weight: 500;
+  font-size: 18px;
+  color: $dark-color;
+}
+
+h1, .wpex-h1 {
+  font-family: $font-family-primary;
+  font-weight: 700;
+  font-size: 42px;
+  color: #173c46;
+  margin: 0 0 12px 0;
+}
+
+h2, .wpex-h2 {
+  font-family: $font-family-primary;
+  font-weight: 700;
+  font-size: 36px;
+  color: $dark-color;
+}
+
+h3, .wpex-h3 {
+  font-family: $font-family-primary;
+  font-weight: 700;
+  font-size: 28px;
+  color: $dark-color;
+}
+
+// Buttons
+.theme-button {
+  background-color: $tertiary-color;
+  color: $light-color;
+  font-family: $font-family-primary;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-align: center;
+  display: inline-block;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $light-color;
+  }
+}
+
+// Links
+a {
+  color: $secondary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $tertiary-color;
+  }
+}
+
+// Navigation
+#site-navigation-wrap {
+  .main-navigation-ul {
+    .link-inner {
+      font-family: $font-family-tertiary;
+      font-weight: 500;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+
+    .sub-menu .link-inner {
+      font-family: $font-family-secondary;
+      font-weight: 600;
+      font-size: 16px;
+      text-transform: none;
+    }
+  }
+}
+
+// Header
+#site-header {
+  background-color: $light-color;
+  .header-padding {
+    padding-top: 4px;
+    padding-bottom: 16px;
+  }
+
+  #site-logo .logo-img {
+    max-height: 61px;
+    width: auto;
+  }
+}
+
+// Top Bar
+#top-bar-wrap {
+  background-color: $light-color;
+  padding: 16px 0;
+
+  #top-bar-content {
+    font-family: $font-family-secondary;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: .02em;
+  }
+}
+
+// Footer
+#footer {
+  background-color: $primary-color;
+  color: $light-color;
+  padding: 40px 15px;
+
+  .footer-widget {
+    .widget-title {
+      font-family: $font-family-secondary;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+
+  .main-navigation-ul .sub-menu .link-inner {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 17px;
+  }
+
+  .main-navigation-ul .sub-menu .link-inner {
+    font-size: 15px;
+  }
+}
+
+// Other styles
+.page-header {
+  padding: 28px 0 24px;
+  background-color: $primary-color;
+  color: $light-color;
+}
+
+#site-scroll-top {
+  border-radius: 3px;
+  background-color: $tertiary-color;
+  color: $light-color;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $light-color;
+  }
+}
