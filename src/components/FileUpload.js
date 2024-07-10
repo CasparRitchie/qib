@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
+  const [productionId, setProductionId] = useState('');
+  const [version, setVersion] = useState('');
   const [message, setMessage] = useState('');
 
   const handleFileChange = (event) => {
@@ -13,6 +15,8 @@ const FileUpload = () => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('production_id', productionId);
+    formData.append('version', version);
 
     try {
       const response = await axios.post('https://qib-back-9e15c89db56c.herokuapp.com/upload', formData, {
@@ -24,6 +28,7 @@ const FileUpload = () => {
       setMessage(response.data);
     } catch (error) {
       console.error('Error uploading file', error);
+      setMessage('Error uploading file');
     }
   };
 
@@ -31,7 +36,28 @@ const FileUpload = () => {
     <div>
       <h2>Upload File</h2>
       <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
+        <div>
+          <label>Production ID</label>
+          <input
+            type="text"
+            value={productionId}
+            onChange={(e) => setProductionId(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Version</label>
+          <input
+            type="text"
+            value={version}
+            onChange={(e) => setVersion(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>File</label>
+          <input type="file" onChange={handleFileChange} required />
+        </div>
         <button type="submit">Upload</button>
       </form>
       {message && <p>{message}</p>}

@@ -1,37 +1,35 @@
-import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import FileUpload from './components/FileUpload';
 import FileList from './components/FileList';
-import StatusPage from './StatusPage';
+import StatusPage from './components/StatusPage';
 import Navbar from './components/Navbar';
-import { AuthContext, AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 
 function AppContent() {
-  const { user, loading, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user, loading, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading indicator while checking auth status
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
       <Navbar user={user} onLogout={handleLogout} />
       <Routes>
-        <Route path="/login" element={user ? <Navigate to="/files" /> : <Login />} />
-        <Route path="/upload" element={user ? <FileUpload /> : <Navigate to="/login" />} />
+        <Route path="/login" element={!user ? <Login /> : <Navigate to="/documents" />} />
+        <Route path="/upload" element={user ? <FileUpload /> : <Navigate to="/upload" />} />
         <Route path="/files" element={user ? <FileList /> : <Navigate to="/login" />} />
         <Route path="/documents" element={user ? <FileList /> : <Navigate to="/login" />} />
-        <Route path="/status" element={user ? <StatusPage /> : <Navigate to="/login" />} />
-        <Route path="/register" element={user ? <StatusPage /> : <Navigate to="/login" />} />
+        <Route path="/status" element={user ? <StatusPage /> : <Navigate to="/status" />} />
+        <Route path="/register" element={<StatusPage />} />
         <Route path="/download/:id" element={user ? <FileList /> : <Navigate to="/login" />} />
-        <Route path="/" element={<Navigate to={user ? "/files" : "/login"} />} />
+        <Route path="/" element={<Navigate to={user ? "/documents" : "/login"} />} />
       </Routes>
     </div>
   );
@@ -39,11 +37,11 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
+      <AuthProvider>
         <AppContent />
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

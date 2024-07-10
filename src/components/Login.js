@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post('https://qib-back-9e15c89db56c.herokuapp.com/login', {
-        username,
-        password
-      });
-
-      // Assuming you store the token in localStorage for further use
-      localStorage.setItem('token', response.data.token);
-      setError('');
-      // Redirect to another page or indicate success in some way
+      await login(username, password);
+      navigate('/documents');
     } catch (error) {
+      console.error('Error logging in', error);
       setError('Invalid username or password');
     }
   };
