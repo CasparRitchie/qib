@@ -13,6 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(username, password);
+      window.location.reload();
       navigate('/documents');
     } catch (error) {
       console.error('Error logging in', error);

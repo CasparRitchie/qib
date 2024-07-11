@@ -22,7 +22,7 @@ const Navbar = () => {
             </div>
             <div id="site-navigation" className="wpex-clr" aria-label="Main menu">
               <ul id="menu-main-navigation" className="main-navigation-ul dropdown-menu wpex-dropdown-menu wpex-dropdown-menu--onhover">
-                <li className="menu-item"><Link to="/">Home</Link></li>
+                <li className="menu-item"><Link to="/">View documents</Link></li>
                 <li className="menu-item"><Link to="/about">About</Link></li>
                 <li className="menu-item"><Link to="/productions">Productions</Link></li>
                 <li className="menu-item"><Link to="/status">Status</Link></li>
