@@ -1,7 +1,5 @@
 // Variables
 $font-family-primary: 'Hind', sans-serif;
-$font-family-secondary: 'Open Sans', sans-serif;
-$font-family-tertiary: 'Poppins', sans-serif;
 $primary-color: #0b4661;
 $secondary-color: #0094d2;
 $tertiary-color: #003c56;
@@ -78,7 +76,6 @@ a {
 // Navigation
 #site-navigation-wrap {
   transition: background-color 0.15s ease, border-color 0.15s ease;
-  background-color: red($color: #000000);
   --wpex-main-nav-link-color: #ffffff;
   --wpex-hover-main-nav-link-color: #0b4661;
   --wpex-active-main-nav-link-color: #003952;
@@ -95,19 +92,17 @@ a {
 
   .main-navigation-ul {
     list-style: none;
-    border-color: white;
     padding: 0;
     margin: 0;
 
     .link-inner {
-      font-family: $font-family-tertiary;
+      font-family: $font-family-primary;
       font-weight: 500;
       font-size: 16px;
       text-transform: uppercase;
     }
 
     .sub-menu .link-inner {
-      font-family: $font-family-secondary;
       font-weight: 600;
       font-size: 16px;
       text-transform: none;
@@ -164,12 +159,9 @@ a {
   }
 }
 
-
-
 // Header
-#site-header header {
+#site-header {
   background-color: $light-color;
-
   .header-padding {
     padding-top: 4px;
     padding-bottom: 16px;
@@ -181,16 +173,50 @@ a {
   }
 }
 
-// Top Bar
-#top-bar-wrap {
-  background-color: $light-color;
-  padding: 16px 0;
+// Mobile menu styles
+@media (max-width: 768px) {
+  #site-navigation-wrap {
+    display: block;
+    background-color: $tertiary-color;
+    padding: 10px;
+    color: $light-color;
+  }
 
-  #top-bar-content {
-    font-family: $font-family-secondary;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: .02em;
+  .main-navigation-ul {
+    display: flex;
+    flex-direction: column;
+
+    .menu-item {
+      display: block;
+    }
+  }
+
+  .wpex-mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: $tertiary-color;
+  }
+
+  .mobile-menu-toggle__icon span {
+    background-color: $light-color;
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: $tertiary-color;
+    padding: 15px;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+  }
+
+  .mobile-menu a {
+    color: $light-color;
+    padding: 10px 0;
   }
 }
 
@@ -202,7 +228,7 @@ a {
 
   .footer-widget {
     .widget-title {
-      font-family: $font-family-secondary;
+      font-family: $font-family-primary;
       font-weight: 600;
       font-size: 14px;
     }
@@ -286,141 +312,13 @@ a {
   --wpex-table-thead-bg: var(--wpex-surface-2);
   --wpex-table-cell-border-color: var(--wpex-border-main);
   --wpex-table-thead-color: var(--wpex-text-1);
-  --wpex-table-th-color: var(--wpex-text-1);
-  --wpex-input-bg: var(--wpex-white);
-  --wpex-input-color: var(--wpex-gray-700);
-  --wpex-input-border-color: var(--wpex-border-main);
-  --wpex-focus-input-color: var(--wpex-input-color);
-  --wpex-focus-input-bg: var(--wpex-input-bg);
-  --wpex-focus-input-border-color: var(--wpex-input-border-color);
-  background: var(--wpex-surface-1);
-  color: var(--wpex-text-2);
-}// Mobile menu styles
-@media (max-width: 768px) {
-  #site-navigation-wrap {
-    display: none;
+  --wpex-table-th-color: var(–wpex-text-1);
+  --wpex-input-bg: var(–wpex-white);
+  --wpex-input-color: var(–wpex-gray-700);
+  --wpex-input-border-color: var(–wpex-border-main);
+  --wpex-focus-input-color: var(–wpex-input-color);
+  --wpex-focus-input-bg: var(–wpex-input-bg);
+  --wpex-focus-input-border-color: var(–wpex-input-border-color);
+  background: var(–wpex-surface-1);
+  color: var(–wpex-text-2);
   }
-
-  #mobile-menu {
-    display: block;
-  }
-
-  .wpex-mobile-menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: $tertiary-color;
-  }
-
-  .mobile-menu-toggle__icon span {
-    background-color: $light-color;
-  }
-
-  .mobile-menu {
-    display: none;
-    flex-direction: column;
-    background-color: $tertiary-color;
-    padding: 15px;
-  }
-
-  .mobile-menu a {
-    color: $light-color;
-    padding: 10px 0;
-  }
-
-  .mobile-menu-toggle[aria-expanded="true"] + .mobile-menu {
-    display: flex;
-  }
-}
-
-#mobile-menu {
-  display: none;
-}
-
-// Header adjustments for mobile
-.header {
-  position: relative;
-  z-index: 10;
-}
-
-// Login form container adjustments
-.login-form-container {
-  position: relative;
-  z-index: 20;
-  padding-top: 60px; /* Add padding to push the form down if needed */
-}
-
-.main-content {
-  padding-top: 60px; /* This should match the height of the header */
-}
-
-// Additional Styles
-.navbar-style-one .dropdown-menu > li.menu-item > a {
-  padding: 0 11px 0 0;
-}
-
-.wpex-flush-dropdowns .main-navigation-ul > .menu-item > a {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.wpex-flush-dropdowns #site-navigation,
-.wpex-flush-dropdowns .main-navigation-ul,
-.wpex-flush-dropdowns .main-navigation-ul > li,
-.wpex-flush-dropdowns .main-navigation-ul > .menu-item > a {
-  height: 100%;
-}
-
-.main-navigation-ul > .menu-item > a {
-  display: block;
-  color: var(--wpex-main-nav-link-color, var(--wpex-text-2));
-  background: var(--wpex-main-nav-link-bg);
-  background-color: $primary-color;
-
-  padding: var(--wpex-main-nav-link-padding-y, 0px) var(--wpex-main-nav-link-padding-x, 0px);
-  line-height: normal;
-}
-
-.main-navigation a {
-  text-decoration: none;
-}
-
-a {
-  color: var(--wpex-link-color, var(--wpex-accent));
-  text-decoration-line: var(--wpex-link-decoration-line);
-  text-decoration-color: var(--wpex-link-decoration-color);
-  text-decoration-style: var(--wpex-link-decoration-style);
-  text-decoration-thickness: var(--wpex-link-decoration-thickness);
-  text-underline-offset: var(--wpex-link-underline-offset);
-}
-
-*, *:before, *:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-// Responsive adjustments for typography
-@media (max-width: 1024px) {
-  body {
-    font-size: 18px;
-  }
-
-  .main-navigation-ul .sub-menu .link-inner {
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-    font-size: 17px;
-  }
-
-  .main-navigation-ul .sub-menu .link-inner {
-    font-size: 15px;
-  }
-}
-header{
-  background-color: red($color: #ef0707);
-}
