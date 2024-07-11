@@ -7,6 +7,8 @@ import StatusPage from './components/StatusPage';
 import Navbar from './components/Navbar';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './styles/styles.scss'; // Importing the SCSS file
+import Footer from './components/Footer';
+
 
 function AppContent() {
   const { user, loading, logout } = useAuth();
@@ -36,6 +38,9 @@ function AppContent() {
           <Route path="/" element={<Navigate to={user ? "/documents" : "/login"} />} />
         </Routes>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
