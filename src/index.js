@@ -1,13 +1,16 @@
+// src/index.js
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
+import ReactDOM from 'react-dom';
 import './index.css';
+import './styles/styles.scss';
+import App from './App';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
+
+serviceWorkerRegistration.register();

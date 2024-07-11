@@ -21,6 +21,9 @@ body {
   font-weight: 500;
   font-size: 18px;
   color: $dark-color;
+  line-height: var(--wpex-body-line-height, var(--wpex-leading-relaxed));
+  background-color: var(--wpex-bg-color);
+  overflow-x: hidden;
 }
 
 h1, .wpex-h1 {
@@ -31,18 +34,18 @@ h1, .wpex-h1 {
   margin: 0 0 12px 0;
 }
 
-h2, .wpex-h2 {
+h2, .wpex-h2, h3, .wpex-h3 {
   font-family: $font-family-primary;
   font-weight: 700;
-  font-size: 36px;
   color: $dark-color;
 }
 
+h2, .wpex-h2 {
+  font-size: 36px;
+}
+
 h3, .wpex-h3 {
-  font-family: $font-family-primary;
-  font-weight: 700;
   font-size: 28px;
-  color: $dark-color;
 }
 
 // Buttons
@@ -59,7 +62,6 @@ h3, .wpex-h3 {
 
   &:hover {
     background-color: $secondary-color;
-    color: $light-color;
   }
 }
 
@@ -75,7 +77,28 @@ a {
 
 // Navigation
 #site-navigation-wrap {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  background-color: red($color: #000000);
+  --wpex-main-nav-link-color: #ffffff;
+  --wpex-hover-main-nav-link-color: #0b4661;
+  --wpex-active-main-nav-link-color: #003952;
+  --wpex-dropmenu-link-padding-y: 5px;
+  --wpex-dropmenu-bg: $tertiary-color;
+  --wpex-dropmenu-caret-bg: $tertiary-color;
+  --wpex-dropmenu-link-color: $light-color;
+  --wpex-hover-dropmenu-link-color: $secondary-color;
+  --wpex-hover-dropmenu-link-bg: $tertiary-color;
+  --wpex-active-dropmenu-link-color: $secondary-color;
+  --wpex-active-hover-dropmenu-link-color: $secondary-color;
+  --wpex-megamenu-padding: 20px;
+  --wpex-megamenu-gutter: 20px;
+
   .main-navigation-ul {
+    list-style: none;
+    border-color: white;
+    padding: 0;
+    margin: 0;
+
     .link-inner {
       font-family: $font-family-tertiary;
       font-weight: 500;
@@ -89,12 +112,64 @@ a {
       font-size: 16px;
       text-transform: none;
     }
+
+    .menu-item {
+      display: inline-block;
+      position: relative;
+
+      > a {
+        display: table-cell;
+        vertical-align: middle;
+        color: var(--wpex-main-nav-link-color);
+        padding: var(--wpex-main-nav-link-padding-y) var(--wpex-main-nav-link-padding-x);
+        text-decoration: none;
+
+        &:hover, &:focus {
+          color: var(--wpex-hover-main-nav-link-color);
+        }
+
+        span.link-inner {
+          padding: var(--wpex-main-nav-link-inner-padding-y) var(--wpex-main-nav-link-inner-padding-x);
+        }
+      }
+
+      &.menu-item-has-children > a .nav-arrow {
+        display: inline-block;
+        margin-left: 5px;
+      }
+
+      .sub-menu {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        background: var(--wpex-dropmenu-bg);
+        padding: var(--wpex-megamenu-padding);
+
+        a {
+          color: var(--wpex-dropmenu-link-color);
+
+          &:hover, &:focus {
+            color: var(--wpex-hover-dropmenu-link-color);
+            background: var(--wpex-hover-dropmenu-link-bg);
+          }
+        }
+      }
+
+      &:hover > .sub-menu,
+      &:focus-within > .sub-menu {
+        display: block;
+      }
+    }
   }
 }
 
+
+
 // Header
-#site-header {
+#site-header header {
   background-color: $light-color;
+
   .header-padding {
     padding-top: 4px;
     padding-bottom: 16px;
@@ -143,25 +218,19 @@ a {
   }
 }
 
-// Responsive
-@media (max-width: 1024px) {
-  body {
-    font-size: 18px;
-  }
-
-  .main-navigation-ul .sub-menu .link-inner {
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-    font-size: 17px;
-  }
-
-  .main-navigation-ul .sub-menu .link-inner {
-    font-size: 15px;
-  }
+#footer-bottom {
+  padding: 40px 15px;
+  background-color: $tertiary-color;
+  color: $light-color;
+  --wpex-text-2: $light-color;
+  --wpex-text-3: $light-color;
+  --wpex-text-4: $light-color;
+  --wpex-link-color: #deeaf6;
+  --wpex-hover-link-color: #deeaf6;
+  --wpex-link-decoration-line: none;
+  --wpex-hover-link-decoration-line: none;
+  --wpex-link-decoration-color: currentColor;
+  --wpex-hover-link-decoration-color: currentColor;
 }
 
 // Other styles
@@ -178,27 +247,7 @@ a {
 
   &:hover {
     background-color: $secondary-color;
-    color: $light-color;
   }
-}
-
-
-#footer-bottom {
-  padding: 40px 15px;
-  background-color: #003c56;
-  color: #ffffff;
-  --wpex-text-2: #ffffff;
-  --wpex-text-3: #ffffff;
-  --wpex-text-4: #ffffff;
-  --wpex-link-color: #deeaf6;
-  --wpex-hover-link-color: #deeaf6;
-}
-
-#footer-bottom {
-  --wpex-link-decoration-line: none;
-  --wpex-hover-link-decoration-line: none;
-  --wpex-link-decoration-color: currentColor;
-  --wpex-hover-link-decoration-color: currentColor;
 }
 
 .wpex-text-center {
@@ -246,177 +295,67 @@ a {
   --wpex-focus-input-border-color: var(--wpex-input-border-color);
   background: var(--wpex-surface-1);
   color: var(--wpex-text-2);
+}// Mobile menu styles
+@media (max-width: 768px) {
+  #site-navigation-wrap {
+    display: none;
+  }
+
+  #mobile-menu {
+    display: block;
+  }
+
+  .wpex-mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: $tertiary-color;
+  }
+
+  .mobile-menu-toggle__icon span {
+    background-color: $light-color;
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: $tertiary-color;
+    padding: 15px;
+  }
+
+  .mobile-menu a {
+    color: $light-color;
+    padding: 10px 0;
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] + .mobile-menu {
+    display: flex;
+  }
 }
 
-body {
-  font-family: Hind;
-  font-weight: 500;
-  font-size: 18px;
-  color: #004455;
-  font-family: var(--wpex-body-font-family, var(--wpex-font-sans));
-  font-size: var(--wpex-body-font-size, 13px);
-  line-height: var(--wpex-body-line-height, var(--wpex-leading-relaxed));
-  color: var(--wpex-text-2);
-  background-color: var(--wpex-bg-color);
-  overflow-x: hidden;
-}
-
-
-// src/styles/styles.scss
-
-#site-navigation-wrap {
-  --wpex-main-nav-link-color: #003952;
-  --wpex-hover-main-nav-link-color: #0b4661;
-  --wpex-active-main-nav-link-color: #003952;
-  --wpex-dropmenu-link-padding-y: 5px;
-  --wpex-dropmenu-bg: #003c56;
-  --wpex-dropmenu-caret-bg: #003c56;
-  --wpex-dropmenu-link-color: #ffffff;
-  --wpex-hover-dropmenu-link-color: #0094d2;
-  --wpex-hover-dropmenu-link-bg: #003c56;
-  --wpex-active-dropmenu-link-color: #0094d2;
-  --wpex-active-hover-dropmenu-link-color: #0094d2;
-  --wpex-megamenu-padding: 20px;
-  --wpex-megamenu-gutter: 20px;
-}
-
-#site-navigation-wrap {
-  transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.wpex-flush-dropdowns.navbar-style-one {
-  height: 100%;
-  margin-top: 0;
-  top: 0;
-}
-
-.wpex-flush-dropdowns {
-  --wpex-main-nav-link-padding-y: 0;
-  --wpex-main-nav-line-height: normal;
-}
-
-.navbar-style-one {
-  --wpex-main-nav-link-padding-y: 0px;
-  --wpex-main-nav-link-padding-x: 4px;
-  --wpex-main-nav-link-inner-padding-y: .5em;
-  --wpex-main-nav-link-inner-padding-x: 11px;
-  position: absolute;
-  top: 50%;
-  background: var(--wpex-main-nav-bg, transparent);
-  margin-top: calc(-1*(var(--wpex-main-nav-height, 50px) / 2));
-  right: calc(-1*(var(--wpex-main-nav-link-padding-x) + var(--wpex-main-nav-link-inner-padding-x)));
-}
-
-.navbar-fixed-height {
-  height: var(--wpex-main-nav-height, 50px);
-}
-
-
-// src/styles/styles.scss
-
-#site-navigation-wrap {
-  --wpex-main-nav-link-color: #003952;
-  --wpex-hover-main-nav-link-color: #0b4661;
-  --wpex-active-main-nav-link-color: #003952;
-  --wpex-dropmenu-link-padding-y: 5px;
-  --wpex-dropmenu-bg: #003c56;
-  --wpex-dropmenu-caret-bg: #003c56;
-  --wpex-dropmenu-link-color: #ffffff;
-  --wpex-hover-dropmenu-link-color: #0094d2;
-  --wpex-hover-dropmenu-link-bg: #003c56;
-  --wpex-active-dropmenu-link-color: #0094d2;
-  --wpex-active-hover-dropmenu-link-color: #0094d2;
-  --wpex-megamenu-padding: 20px;
-  --wpex-megamenu-gutter: 20px;
-}
-
-#site-navigation-wrap {
-  transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.wpex-flush-dropdowns.navbar-style-one {
-  height: 100%;
-  margin-top: 0;
-  top: 0;
-}
-
-.wpex-flush-dropdowns {
-  --wpex-main-nav-link-padding-y: 0;
-  --wpex-main-nav-line-height: normal;
-}
-
-.navbar-style-one {
-  --wpex-main-nav-link-padding-y: 0px;
-  --wpex-main-nav-link-padding-x: 4px;
-  --wpex-main-nav-link-inner-padding-y: .5em;
-  --wpex-main-nav-link-inner-padding-x: 11px;
-  position: absolute;
-  top: 50%;
-  background: var(--wpex-main-nav-bg, transparent);
-  margin-top: calc(-1*(var(--wpex-main-nav-height, 50px) / 2));
-  right: calc(-1*(var(--wpex-main-nav-link-padding-x) + var(--wpex-main-nav-link-inner-padding-x)));
-}
-
-.navbar-fixed-height {
-  height: var(--wpex-main-nav-height, 50px);
-}
-
-.main-navigation-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.menu-item {
-  display: inline-block;
-  position: relative;
-}
-
-.menu-item a {
-  color: var(--wpex-main-nav-link-color);
-  padding: var(--wpex-main-nav-link-padding-y) var(--wpex-main-nav-link-padding-x);
-  text-decoration: none;
-}
-
-.menu-item a:hover,
-.menu-item a:focus {
-  color: var(--wpex-hover-main-nav-link-color);
-}
-
-.menu-item a span.link-inner {
-  padding: var(--wpex-main-nav-link-inner-padding-y) var(--wpex-main-nav-link-inner-padding-x);
-}
-
-.menu-item-has-children > a .nav-arrow {
-  display: inline-block;
-  margin-left: 5px;
-}
-
-.sub-menu {
+#mobile-menu {
   display: none;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  background: var(--wpex-dropmenu-bg);
-  padding: var(--wpex-megamenu-padding);
 }
 
-.menu-item-has-children:hover > .sub-menu,
-.menu-item-has-children:focus-within > .sub-menu {
-  display: block;
+// Header adjustments for mobile
+.header {
+  position: relative;
+  z-index: 10;
 }
 
-.sub-menu a {
-  color: var(--wpex-dropmenu-link-color);
+// Login form container adjustments
+.login-form-container {
+  position: relative;
+  z-index: 20;
+  padding-top: 60px; /* Add padding to push the form down if needed */
 }
 
-.sub-menu a:hover,
-.sub-menu a:focus {
-  color: var(--wpex-hover-dropmenu-link-color);
-  background: var(--wpex-hover-dropmenu-link-bg);
-  text-decoration: none;
+.main-content {
+  padding-top: 60px; /* This should match the height of the header */
 }
-/* Additional Styles */
+
+// Additional Styles
 .navbar-style-one .dropdown-menu > li.menu-item > a {
   padding: 0 11px 0 0;
 }
@@ -437,6 +376,8 @@ body {
   display: block;
   color: var(--wpex-main-nav-link-color, var(--wpex-text-2));
   background: var(--wpex-main-nav-link-bg);
+  background-color: $primary-color;
+
   padding: var(--wpex-main-nav-link-padding-y, 0px) var(--wpex-main-nav-link-padding-x, 0px);
   line-height: normal;
 }
@@ -458,4 +399,28 @@ a {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+// Responsive adjustments for typography
+@media (max-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+
+  .main-navigation-ul .sub-menu .link-inner {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 17px;
+  }
+
+  .main-navigation-ul .sub-menu .link-inner {
+    font-size: 15px;
+  }
+}
+header{
+  background-color: red($color: #ef0707);
 }
